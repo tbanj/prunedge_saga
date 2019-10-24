@@ -22,6 +22,9 @@ class Signin extends Component {
             return;
         }
         // this.props.onLoginUser(serverData);
+        debugger;
+        console.log(user, serverData)
+
         window.location = '/profile';
     }
     render() {
@@ -72,5 +75,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Signin);
+// export default connect(null, mapDispatchToProps)(Signin);
+export default Signin;
 

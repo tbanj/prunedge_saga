@@ -10,9 +10,10 @@ import "./../node_modules/font-awesome/css/font-awesome.css";
 
 import reducer from './store/reducer.js';
 const store = createStore(reducer);
+// <Provider store={store}><App /></Provider>
 ReactDOM.render(
     <BrowserRouter>
-        <Provider store={store}><App /></Provider>
+        <App />
     </BrowserRouter>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

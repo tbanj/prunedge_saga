@@ -1,11 +1,12 @@
 import http from './httpService.js';
+import env from '../env.js'
 
 export function getUsers() {
-    return fetch(`https://jsonplaceholder.typicode.com/users`)
+    return fetch(`${env.mock_api}/users`)
 }
 
 export function storeUser(data) {
-    return fetch('https://jsonplaceholder.typicode.com/users', {
+    return fetch(`${env.mock_api}/users`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

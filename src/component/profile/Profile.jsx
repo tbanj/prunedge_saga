@@ -6,16 +6,17 @@ class Profile extends Component {
         return (
             <React.Fragment>
                 <div className="container">
-                    {this.props.storeduUsers.jobTitle}
+                    {this.props.users.email}
                 </div>
             </React.Fragment>
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        storeduUsers: state.users
-    }
-}
-export default connect(mapStateToProps)(Profile);
+// const mapStateToProps =()=>{
+//     return{
+//         storeduUsers:
+//     }
+// }
+// export default connect(mapStateToProps)(Profile);
+export default Profile;

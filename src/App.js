@@ -12,7 +12,7 @@ import NotFound from './component/not-found/NotFound';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import ProtectedRoute from './component/ProtectedRoute.jsx';
-const data = new Storage();
+const serverData = new Storage();
 class App extends Component {
   constructor(props) {
     super(props)
@@ -34,10 +34,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const user = data.getItemsFromStorage();
-
-    this.setState({ user })
-
+    const user = serverData.getItemsFromStorage();
+    console.log(user)
+    this.setState({ user: { ...user } })
+    console.log(this.state.user)
   }
 
 
@@ -47,8 +47,8 @@ class App extends Component {
       <React.Fragment>
         <ToastContainer />
         <Switch>
-          <Route path="/signin" render={(props) => <Signin {...props} users={user} />} />
           <Route path="/not-found" component={NotFound} />
+          <Route path="/signin" render={(props) => <Signin {...props} users={user} />} />
           <ProtectedRoute path="/profile" render={(props) => <Profile {...props} users={user} />} />
           <Route exact path="/" render={(props) => <Signup {...props} users={user} handelAddUser={this.handelAddUser} />} />
           <Redirect to="/not-found" />

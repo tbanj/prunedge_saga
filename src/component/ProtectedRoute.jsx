@@ -1,9 +1,9 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 import Storage from '../service/Storage.js';
 const data = new Storage();
+const newData = data.getItemsFromStorage();
 
 
 
@@ -16,9 +16,8 @@ const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
         < Route
             {...rest}
             render={props => {
-                debugger;
-                if (!props.users.fullName) return <Redirect to={{
-                    pathname: '/',
+                if (!newData.email) return <Redirect to={{
+                    pathname: '/signin',
                     state: { from: props.location }
                 }} />;
                 return Component ? <Component {...props} /> : render(props);
