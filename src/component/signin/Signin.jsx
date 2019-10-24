@@ -20,12 +20,13 @@ class Signin extends Component {
         if (serverData.email !== user.email || serverData.password !== user.password) {
             toast.error("invalid email or password");
             return;
+        } else {
+            let newData = { ...serverData, loginNow: true };
+            data.clearItemsFromStorage();
+            data.storeItem(newData);
+            window.location = '/profile';
         }
-        // this.props.onLoginUser(serverData);
-        debugger;
-        console.log(user, serverData)
 
-        window.location = '/profile';
     }
     render() {
         return (
@@ -45,7 +46,7 @@ class Signin extends Component {
                             </div>
                         </div>
                         <div className="col-md-6" style={{ backgroundColor: '#F6F9FF' }}>
-                            <div>{this.props.users.email}</div>
+                            {/* <div>{this.props.storedUser.email}</div> */}
                             <div className="container my-5">
                                 <div className="row ">
                                     <div className="col-md-10 offset-md-1">
@@ -71,10 +72,18 @@ class Signin extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, jobTitle: val.jobTitle } })
+        onLoginUser: (val) => dispatch({
+            type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, jobTitle: val.jobTitle }
+        })
     }
 }
 
-// export default connect(null, mapDispatchToProps)(Signin);
-export default Signin;
+const mapStateToProps = (state) => {
+    return {
+        storedUser: state.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+// export default Signin;
 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { storeUser } from "./service/dataService.js";
+import { connect } from "react-redux";
+import * as actionTypes from './store/action.js';
 import Storage from "./service/Storage.js";
 
 import Signin from './component/signin/Signin';
@@ -25,7 +27,8 @@ class App extends Component {
 
   handelAddUser = (user) => {
     const data = { ...user };
-    this.setState({ users: data });
+    // this.setState({ users: data });
+    this.props.onLoginUser(data)
     return data;
   }
 
@@ -34,10 +37,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const user = serverData.getItemsFromStorage();
-    console.log(user)
-    this.setState({ user: { ...user } })
-    console.log(this.state.user)
+    let user = serverData.getItemsFromStorage();
+    delete user.loginNow;
+    // this.setState({ user: { ...user } });
+    this.props.onLoginUser(user);
   }
 
 
@@ -48,9 +51,9 @@ class App extends Component {
         <ToastContainer />
         <Switch>
           <Route path="/not-found" component={NotFound} />
-          <Route path="/signin" render={(props) => <Signin {...props} users={user} />} />
-          <ProtectedRoute path="/profile" render={(props) => <Profile {...props} users={user} />} />
-          <Route exact path="/" render={(props) => <Signup {...props} users={user} handelAddUser={this.handelAddUser} />} />
+          <Route path="/signin" render={(props) => <Signin {...props} />} />
+          <ProtectedRoute path="/profile" render={(props) => <Profile {...props} />} />
+          <Route exact path="/" render={(props) => <Signup {...props} handelAddUser={this.handelAddUser} />} />
           <Redirect to="/not-found" />
         </Switch>
       </React.Fragment>
@@ -58,4 +61,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoginUser: (val) => dispatch({
+      type: actionTypes.LOGIN_USER, resultEld: {
+        fullName: val.fullName, jobTitle: val.jobTitle,
+      }
+    })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

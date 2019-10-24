@@ -1,12 +1,12 @@
 import * as actionTypes from './action';
 const initialState = {
-    users: {}
+    user: {}
 }
 
 const reducer = (state = initialState, action) => {
-    if (action.type === 'DECREMENT') {
+    if (action.type === actionTypes.LOGIN_USER) {
         const newState = Object.assign({}, state);
-        newState.users = action.resultEld
+        newState.user = action.resultEld
 
         return newState;
     }

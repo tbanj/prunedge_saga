@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../store/action';
 import { getUsers, storeUser } from "../../service/dataService.js";
 import MultiForm from '../template/MultiForm';
+
 import Storage from '../../service/Storage';
 
 import 'antd/dist/antd.css';
@@ -18,13 +21,9 @@ class Signup extends Component {
     }
     getData() {
         getUsers().then(resp => resp.json()).then((body) => {
-            if (body) {
-                toast.success("data retrieved successfully");
-            }
+            if (body) { toast.success("data retrieved successfully"); }
         }, (error) => {
-            if (error.response && error.response.status === 422) {
-                toast.error(error.response.data.body.message);
-            }
+            if (error.response && error.response.status === 422) { toast.error(error.response.data.body.message); }
             else { console.error(error); toast.error("an unexpected error occurred signup"); }
         }).catch((error) => { console.error(error) })
     }
@@ -36,8 +35,6 @@ class Signup extends Component {
             if (resp.status === 201) {
 
                 return resp.json();
-            } else {
-                throw new Error('Something went wrong on api server!');
             }
         }, (error) => {
             toast.error("error encounter during data fetch");
@@ -46,7 +43,7 @@ class Signup extends Component {
             if (response) {
                 toast.success(`registration successfull`);
                 data.storeItem(user);
-
+                this.props.onLoginUser(user);
                 this.child.current.resetFields();
                 this.props.history.push("/signin");
             }
@@ -75,7 +72,7 @@ class Signup extends Component {
                             </div>
                         </div>
                         <div className="col-md-6" style={{ backgroundColor: '#F6F9FF' }}>
-                            <div>{this.props.users.fullName}</div>
+                            {/* <div>{this.props.storedUser.fullName}</div> */}
                             <div className="container my-5">
                                 <div className="row ">
                                     <div className="col-md-10 offset-md-1">
@@ -99,5 +96,16 @@ class Signup extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        storedUser: state.user
+    }
+}
 
-export default Signup;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, email: val.email, password: val.password, jobTitle: val.jobTitle } })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
