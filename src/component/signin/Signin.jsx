@@ -33,7 +33,7 @@ export class Signin extends Component {
         const { location } = this.props;
         return (
             <React.Fragment>
-                <div className="container-fluid">
+                <div data-test="signinComponent" className="container-fluid">
                     <div className="row">
                         <div className="col-md-6 py-5 mt-5">
 
@@ -43,7 +43,7 @@ export class Signin extends Component {
                                  bring all of your documents into one place—quickly, easily and securely.
                                     </p>
                                 <div className="pl-3 pt-3">
-                                    <img className="img-fluid" src="/images/welcome_back.png" alt="join workspace" />
+                                    <img data-test="workSpaceImage" className="img-fluid" src="/images/welcome_back.png" alt="join workspace" />
                                 </div>
                             </div>
                         </div>

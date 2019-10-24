@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ToastContainer, toast } from "react-toastify";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -18,7 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import ProtectedRoute from './component/ProtectedRoute.jsx';
 const serverData = new Storage();
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -42,15 +43,16 @@ class App extends Component {
   componentDidMount() {
     let user = serverData.getItemsFromStorage();
     delete user.loginNow;
-    // this.setState({ user: { ...user } });
-    this.props.onLoginUser(user);
+    // this.setState({ users: { ...user } });
+    // undo this back
+    // this.props.onLoginUser(user);
   }
 
 
   render() {
     const { user } = this.state;
     return (
-      <React.Fragment>
+      <div data-test="appComponent">
         <ToastContainer />
         <Switch>
           <Route path="/not-found" component={NotFound} />
@@ -59,7 +61,7 @@ class App extends Component {
           <Route exact path="/" render={(props) => <Signup {...props} handelAddUser={this.handelAddUser} />} />
           <Redirect to="/not-found" />
         </Switch>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -73,6 +75,16 @@ const mapDispatchToProps = (dispatch) => {
     })
   }
 }
+
+
+
+App.propTypes = {
+  onLoginUser: PropTypes.func,
+};
+
+App.defaultProps = {
+  user: {},
+};
 
 export default connect(null, mapDispatchToProps)(App);
 
