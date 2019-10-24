@@ -74,16 +74,16 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default connect(null, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
 
-const ConnectedApp = connect(null, mapDispatchToProps)(App);
+// const ConnectedApp = connect(null, mapDispatchToProps)(App);
 
-const Root = () => {
-  return <Provider store={store}><ConnectedApp /></Provider>
-}
+// const Root = () => {
+//   return <Provider store={store}><ConnectedApp /></Provider>
+// }
 
-export default Root;
+// export default Root;
 
 

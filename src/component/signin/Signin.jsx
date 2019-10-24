@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as actionTypes from '../../store/action.js';
 import Storage from '../../service/Storage.js';
 import MultiForm from '../template/MultiForm';
@@ -29,6 +30,7 @@ export class Signin extends Component {
 
     }
     render() {
+        const { location } = this.props;
         return (
             <React.Fragment>
                 <div className="container-fluid">
@@ -53,7 +55,7 @@ export class Signin extends Component {
                                         <div className="row shadow-sm py-5 bg-white">
                                             <div className="col-md-10 offset-md-1">
                                                 <MultiForm wrappedComponentRef={(form) => this.form = form}
-                                                    ref={this.child} checkUrl={this.props.history.location.pathname}
+                                                    ref={this.child} checkUrl={location.pathname}
                                                     fromServer={this.fromServer} />
                                             </div>
                                         </div>
@@ -83,6 +85,20 @@ const mapStateToProps = (state) => {
         storedUser: state.user
     }
 }
+
+
+Signin.propTypes = {
+    location: PropTypes.shape({
+        pathname: PropTypes.string,
+    }),
+};
+
+// insert default values for props which is object to avoid your app breaking
+Signin.defaultProps = {
+    location: {
+        pathname: '',
+    },
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signin);
 // export default Signin;

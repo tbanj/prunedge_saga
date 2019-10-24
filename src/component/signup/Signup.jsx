@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as actionTypes from '../../store/action';
 import { getUsers, storeUser } from "../../service/dataService.js";
 import MultiForm from '../template/MultiForm';
@@ -55,6 +56,7 @@ class Signup extends Component {
     }
 
     render() {
+        const { location } = this.props;
         return (
             <React.Fragment>
                 <div className="container-fluid">
@@ -79,7 +81,7 @@ class Signup extends Component {
                                         <div className="row shadow-sm py-5 bg-white">
                                             <div className="col-md-10 offset-md-1">
                                                 <MultiForm wrappedComponentRef={(form) => this.form = form}
-                                                    ref={this.child} checkUrl={this.props.history.location.pathname}
+                                                    ref={this.child} checkUrl={location.pathname}
                                                     onAddUser={this.props.handelAddUser} onSubmitToServer={this.onSubmitToServer} />
                                             </div>
                                         </div>
@@ -107,5 +109,18 @@ const mapDispatchToProps = (dispatch) => {
         onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, email: val.email, password: val.password, jobTitle: val.jobTitle } })
     }
 }
+
+Signup.propTypes = {
+    location: PropTypes.shape({
+        pathname: PropTypes.string,
+    }),
+};
+
+// insert default values for props to avoid your app breaking
+Signup.defaultProps = {
+    location: {
+        pathname: '',
+    },
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom"
 import { Form, Input, Button } from 'antd';
 
@@ -132,6 +133,10 @@ export class RegistrationForm extends React.Component {
         );
     }
 }
+
+RegistrationForm.propTypes = {
+    checkUrl: PropTypes.string,
+};
 
 const MultiForm = Form.create()(RegistrationForm);
 export default MultiForm
