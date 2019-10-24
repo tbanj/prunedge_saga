@@ -8,7 +8,7 @@ import MultiForm from '../template/MultiForm';
 const data = new Storage();
 
 
-class Signin extends Component {
+export class Signin extends Component {
     constructor(props) {
         super(props);
         this.state = { user: { email: "", password: "" } };

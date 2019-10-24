@@ -5,7 +5,7 @@ import { Form, Input, Button } from 'antd';
 import './antform.css';
 
 
-class RegistrationForm extends React.Component {
+export class RegistrationForm extends React.Component {
     state = { confirmDirty: false, autoCompleteResult: [] };
 
     handleSubmit = e => {

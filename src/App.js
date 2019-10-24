@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from "react-toastify";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './store/reducer';
 import { Route, Redirect, Switch } from "react-router-dom";
 import { storeUser } from "./service/dataService.js";
 import { connect } from "react-redux";
@@ -71,4 +74,16 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
+
+const store = createStore(reducer);
+
+const ConnectedApp = connect(null, mapDispatchToProps)(App);
+
+const Root = () => {
+  return <Provider store={store}><ConnectedApp /></Provider>
+}
+
+export default Root;
+
+
