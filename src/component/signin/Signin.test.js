@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAttr } from '../../../util/index'
+import { findByTestAttr, checkProps } from '../../../util/index'
 import { Signin } from './Signin';
 
 
@@ -9,6 +9,26 @@ const setUp = (props = {}) => {
     return component;
 }
 describe('Signin Component', () => {
+
+    // check types of props
+    describe('Check PropTypes', () => {
+
+        it('Should not throw a warning', () => {
+            const expectedProps = {
+                location: {
+                    pathname: 'Test Pathname',
+                },
+                tempArr: [{
+                    name: 'Test name',
+                    age: 25,
+                    isOnline: false
+                }],
+            };
+            const propsErr = checkProps(Signin, expectedProps);
+            expect(propsErr).toBeUndefined();
+
+        });
+    });
 
     // testing for when we have props
     describe('Have props', () => {
@@ -48,5 +68,8 @@ describe('Signin Component', () => {
             expect(component.length).toBe(1);
         })
 
-    })
+    });
+
+
+
 })

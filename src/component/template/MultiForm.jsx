@@ -136,6 +136,10 @@ export class RegistrationForm extends React.Component {
 
 RegistrationForm.propTypes = {
     checkUrl: PropTypes.string,
+    onAddUser: PropTypes.func,
+    onSubmitToServer: PropTypes.func,
+    fromServer: PropTypes.func,
+    
 };
 
 const MultiForm = Form.create()(RegistrationForm);

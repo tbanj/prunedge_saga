@@ -30,7 +30,7 @@ export class Signin extends Component {
 
     }
     render() {
-        const { location } = this.props;
+        const { location, tempArr } = this.props;
         return (
             <React.Fragment>
                 <div data-test="signinComponent" className="container-fluid">
@@ -48,7 +48,8 @@ export class Signin extends Component {
                             </div>
                         </div>
                         <div className="col-md-6" style={{ backgroundColor: '#F6F9FF' }}>
-                            {/* <div>{this.props.storedUser.email}</div> */}
+                            {/* <div>{tempArr[0]}</div> */}
+                            {tempArr ? tempArr.map((data, key) => (<span key={key}>{data.age}</span>)) : ""}
                             <div className="container my-5">
                                 <div className="row ">
                                     <div className="col-md-10 offset-md-1">
@@ -91,15 +92,20 @@ Signin.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string,
     }),
+    tempArr: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        age: PropTypes.number,
+        isOnline: PropTypes.bool,
+    })),
 };
 
 // insert default values for props which is object to avoid your app breaking
 Signin.defaultProps = {
     location: {
-        pathname: '',
+        pathname: '/signin',
     },
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export const signinRedux = connect(mapStateToProps, mapDispatchToProps)(Signin);
 // export default Signin;
 

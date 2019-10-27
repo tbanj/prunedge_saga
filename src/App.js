@@ -3,22 +3,25 @@ import PropTypes from 'prop-types';
 import { ToastContainer, toast } from "react-toastify";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './store/reducer';
+import reducer from './store/reducers/reducer';
 import { Route, Redirect, Switch } from "react-router-dom";
 import { storeUser } from "./service/dataService.js";
 import { connect } from "react-redux";
 import * as actionTypes from './store/action.js';
 import Storage from "./service/Storage.js";
 
-import Signin from './component/signin/Signin';
-import Signup from './component/signup/Signup';
+import { Signin, signinRedux } from './component/signin/Signin';
+import { Signup, SignupRedux } from './component/signup/Signup';
 import Profile from './component/profile/Profile.jsx';
 import NotFound from './component/not-found/NotFound';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import ProtectedRoute from './component/ProtectedRoute.jsx';
+// import { ListUser } from './component/listUser/ListUser';
 const serverData = new Storage();
+
+const tempArr = [{ name: 'Alabi', age: 30, isOnline: true }];
 export class App extends Component {
   constructor(props) {
     super(props)
@@ -41,11 +44,17 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    let user = serverData.getItemsFromStorage();
-    delete user.loginNow;
+
     // this.setState({ users: { ...user } });
     // undo this back
-    // this.props.onLoginUser(user);
+    console.log(this.props.onLoginUser)
+    if (serverData.getItemsFromStorage() !== null) {
+      let user = serverData.getItemsFromStorage();
+      delete user.loginNow;
+      if (this.props.onLoginUser) {
+        this.props.onLoginUser(user);
+      }
+    }
   }
 
 
@@ -56,7 +65,8 @@ export class App extends Component {
         <ToastContainer />
         <Switch>
           <Route path="/not-found" component={NotFound} />
-          <Route path="/signin" render={(props) => <Signin {...props} />} />
+          {/* <Route path="/list-post" component={ListUser} /> */}
+          <Route path="/signin" render={(props) => <Signin {...props} tempArr={tempArr} />} />
           <ProtectedRoute path="/profile" render={(props) => <Profile {...props} />} />
           <Route exact path="/" render={(props) => <Signup {...props} handelAddUser={this.handelAddUser} />} />
           <Redirect to="/not-found" />

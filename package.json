@@ -25,6 +25,7 @@
     "react-toastify": "^5.4.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
+    "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0"
   },
   "scripts": {
@@ -49,7 +50,8 @@
     ]
   },
   "devDependencies": {
-    "jest": "^24.9.0",
-    "jest-enzyme": "^7.1.1"
+    "check-prop-types": "^1.1.2",
+    "jest-enzyme": "^7.1.1",
+    "moxios": "^0.4.0"
   }
 }

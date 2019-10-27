@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchPosts } from '../../actions';
+
 import * as actionTypes from '../../store/action';
 import { getUsers, storeUser } from "../../service/dataService.js";
 import MultiForm from '../template/MultiForm';
+import ListUser from '../listUser/ListUser';
+import { ButtonList } from '../button-list/ButtonList';
+
+
 
 import Storage from '../../service/Storage';
 
@@ -12,14 +18,26 @@ import 'antd/dist/antd.css';
 // import './antform.css';
 const data = new Storage();
 
-class Signup extends Component {
+export class Signup extends Component {
 
     constructor(props) {
         super(props)
         this.state = {};
         this.child = React.createRef();
+        this.fetch = this.fetch.bind(this);
+    }
+
+    fetch() {
+        console.log('dele');
+        // return this.props.onFetchPost();
+        if (this.props.fetchPosts) {
+            this.props.fetchPosts().then((data) => { console.log('inside') }, (error => {
+                console.log('error encounter');
+            }));
+        }
 
     }
+
     getData() {
         getUsers().then(resp => resp.json()).then((body) => {
             if (body) { toast.success("data retrieved successfully"); }
@@ -28,6 +46,8 @@ class Signup extends Component {
             else { console.error(error); toast.error("an unexpected error occurred signup"); }
         }).catch((error) => { console.error(error) })
     }
+
+
 
     onSubmitToServer = (user) => {
         const saveData = user;
@@ -44,7 +64,9 @@ class Signup extends Component {
             if (response) {
                 toast.success(`registration successfull`);
                 data.storeItem(user);
-                this.props.onLoginUser(user);
+                if (this.props.onLoginUser) {
+                    this.props.onLoginUser(user);
+                }
                 this.child.current.resetFields();
                 this.props.history.push("/signin");
             }
@@ -52,17 +74,23 @@ class Signup extends Component {
     }
 
     componentDidMount() {
-        this.getData();
+
     }
 
     render() {
+        const configButton = {
+            buttonText: 'Get Post',
+            // since we are passing this method to a component we need to bind it
+            emitEvent: this.fetch
+        }
         const { location } = this.props;
         return (
             <React.Fragment>
-                <div className="container-fluid">
+                <div data-test="signupComponent" className="container-fluid">
                     <div className="row">
                         <div className="col-md-6 py-5 mt-5">
-
+                            {/* <div>{this.props.users.email}</div> */}
+                            {/* <button onClick={this.getData}>{buttonText}</button> */}
                             <div className="container">
                                 <h1 className="pl-3 col-md-4">Join your Workspace</h1>
                                 <p className="col-md-9 pt-3">EDMS is an intelligent document management solution that helps you you bring all of your documents
@@ -89,6 +117,7 @@ class Signup extends Component {
                                 </div>
                             </div>
 
+                            <div><ButtonList  {...configButton} /></div>
                         </div>
 
                     </div>
@@ -100,20 +129,27 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        storedUser: state.user
+        storedUser: state.user,
+        posts: state.posts
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, email: val.email, password: val.password, jobTitle: val.jobTitle } })
+        onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, email: val.email, password: val.password, jobTitle: val.jobTitle } }),
+
     }
+
 }
 
 Signup.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string,
+
     }),
+    handelAddUser: PropTypes.func,
+    // buttonText: PropTypes.string,
+    // emitEvent: PropTypes.func,
 };
 
 // insert default values for props to avoid your app breaking
@@ -123,4 +159,5 @@ Signup.defaultProps = {
     },
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+// fetchPosts is an action dispatch from another file
+export const SignupRedux = connect(mapStateToProps, { mapDispatchToProps: mapDispatchToProps, fetchPosts: fetchPosts })(Signup);

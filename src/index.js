@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+// is use for redux middleware implementation 
+import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from "react-router-dom";
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import "./../node_modules/font-awesome/css/font-awesome.css";
+import reducer from './store/reducers/reducer.js';
+import App from './App';
+import './index.css';
 
-import reducer from './store/reducer.js';
+export const middlewares = [reduxThunk];
+
+export const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+
+
+
 const store = createStore(reducer);
 
 ReactDOM.render(
