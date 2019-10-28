@@ -15,7 +15,7 @@ there data-test attributes..it make sense if make use of foreach to reduce the c
 const setUp = (initialState = {}) => {
     const store = testStore(initialState);
     const wrapper = shallow(<App store={store} />).dive();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     return wrapper;
 }
 

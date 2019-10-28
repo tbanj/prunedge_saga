@@ -8,7 +8,7 @@ import Signup from './Signup';
 const setUp = (initialState = {}) => {
     const store = testStore(initialState);
     const wrapper = shallow(<Signup store={store} />).childAt(0).dive();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     return wrapper;
 }
 describe('Signup Component', () => {

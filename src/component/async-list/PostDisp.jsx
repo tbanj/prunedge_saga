@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchPosts } from '../../store/actions/index';
 import * as actionTypes from '../../store/action';
 import ListUser from '../listUser/ListUser';
-import { ButtonList } from '../button-list/ButtonList';
+import ButtonList from '../button-list/ButtonList';
 
 class PostDisp extends Component {
     constructor(props) {
@@ -23,20 +23,18 @@ class PostDisp extends Component {
             emitEvent: this.fetch
         };
         const { posts } = this.props;
-        return (<React.Fragment >
-            <div data-test="postDispComponent">
-                <div><ButtonList  {...configButton} /></div>
-                {posts.length > 0 &&
-                    <div>{posts.map((post, index) => {
-                        const { title, body } = post;
-                        const configListItem = {
-                            title,
-                            desc: body
-                        }
-                        return (<ListUser key={index}{...configListItem} />)
-                    })}</div>}
-            </div>
-        </React.Fragment>);
+        return (<div className="postDisp" data-test="postDispComponent">
+            <div><ButtonList  {...configButton} /></div>
+            {posts.length > 0 &&
+                <div>{posts.map((post, index) => {
+                    const { title, body } = post;
+                    const configListItem = {
+                        title,
+                        desc: body,
+                    }
+                    return (<ListUser key={index}{...configListItem} />)
+                })}</div>}
+        </div>);
     }
 }
 

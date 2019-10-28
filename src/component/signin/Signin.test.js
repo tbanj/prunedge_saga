@@ -8,7 +8,7 @@ import Signin from './Signin';
 const setUp = (initialState = {}) => {
     const store = testStore(initialState);
     const wrapper = shallow(<Signin store={store} />).childAt(0).dive();
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     return wrapper;
 }
 
