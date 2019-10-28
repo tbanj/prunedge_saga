@@ -9,7 +9,7 @@ import MultiForm from '../template/MultiForm';
 const data = new Storage();
 
 
-export class Signin extends Component {
+class Signin extends Component {
     constructor(props) {
         super(props);
         this.state = { user: { email: "", password: "" } };
@@ -106,6 +106,6 @@ Signin.defaultProps = {
     },
 };
 
-export const signinRedux = connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
 // export default Signin;
 

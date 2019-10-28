@@ -1,13 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAttr, checkProps } from '../../../util/index'
-import { Signin } from './Signin';
+import { findByTestAttr, checkProps, testStore } from '../../../util/index'
+import Signin from './Signin';
 
 
-const setUp = (props = {}) => {
-    const component = shallow(<Signin {...props} />);
-    return component;
+
+const setUp = (initialState = {}) => {
+    const store = testStore(initialState);
+    const wrapper = shallow(<Signin store={store} />).childAt(0).dive();
+    console.log(wrapper.debug());
+    return wrapper;
 }
+
 describe('Signin Component', () => {
 
     // check types of props

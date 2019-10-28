@@ -16,13 +16,13 @@ describe(' fetchPosts action', () => {
     test('Store is updated correctly', () => {
         const expectedState = [{
             title: 'Example title 1',
-            body: 'Some Text '
+            body: 'Some Text'
         }, {
             title: 'Example title 2',
-            body: 'Some Text '
+            body: 'Some Text'
         }, {
             title: 'Example title 3',
-            body: 'Some Text '
+            body: 'Some Text'
         }];
 
         const expectedUser = { "user": {}, "posts": expectedState };

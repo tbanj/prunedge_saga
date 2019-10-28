@@ -110,16 +110,7 @@ class Signup extends Component {
                                 </div>
                             </div>
 
-                            <div><ButtonList  {...configButton} /></div>
-                            {posts.length > 0 &&
-                                <div>{posts.map((post, index) => {
-                                    const { title, body } = post;
-                                    const configListItem = {
-                                        title,
-                                        desc: body
-                                    }
-                                    return (<ListUser key={index}{...configListItem} />)
-                                })}</div>}
+
 
                         </div>
 

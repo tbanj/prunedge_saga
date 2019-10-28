@@ -23,17 +23,19 @@ class PostDisp extends Component {
             emitEvent: this.fetch
         };
         const { posts } = this.props;
-        return (<React.Fragment>
-            <div><ButtonList  {...configButton} /></div>
-            {posts.length > 0 &&
-                <div>{posts.map((post, index) => {
-                    const { title, body } = post;
-                    const configListItem = {
-                        title,
-                        desc: body
-                    }
-                    return (<ListUser key={index}{...configListItem} />)
-                })}</div>}
+        return (<React.Fragment >
+            <div data-test="postDispComponent">
+                <div><ButtonList  {...configButton} /></div>
+                {posts.length > 0 &&
+                    <div>{posts.map((post, index) => {
+                        const { title, body } = post;
+                        const configListItem = {
+                            title,
+                            desc: body
+                        }
+                        return (<ListUser key={index}{...configListItem} />)
+                    })}</div>}
+            </div>
         </React.Fragment>);
     }
 }

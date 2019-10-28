@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import * as actionTypes from './store/action.js';
 import Storage from "./service/Storage.js";
 
-import { Signin, signinRedux } from './component/signin/Signin';
+import Signin from './component/signin/Signin';
 import Signup from './component/signup/Signup';
 import Profile from './component/profile/Profile.jsx';
 import NotFound from './component/not-found/NotFound';
@@ -45,7 +45,6 @@ class App extends Component {
 
     // this.setState({ users: { ...user } });
     // undo this back
-    console.log(this.props.onLoginUser)
     if (serverData.getItemsFromStorage() !== null) {
       let user = serverData.getItemsFromStorage();
       delete user.loginNow;
