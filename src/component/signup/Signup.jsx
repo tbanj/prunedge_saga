@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchPosts } from '../../actions';
-
+import { fetchPosts } from '../../store/actions/index';
 import * as actionTypes from '../../store/action';
 import { getUsers, storeUser } from "../../service/dataService.js";
 import MultiForm from '../template/MultiForm';
@@ -18,7 +17,7 @@ import 'antd/dist/antd.css';
 // import './antform.css';
 const data = new Storage();
 
-export class Signup extends Component {
+class Signup extends Component {
 
     constructor(props) {
         super(props)
@@ -29,13 +28,7 @@ export class Signup extends Component {
 
     fetch() {
         console.log('dele');
-        // return this.props.onFetchPost();
-        if (this.props.fetchPosts) {
-            this.props.fetchPosts().then((data) => { console.log('inside') }, (error => {
-                console.log('error encounter');
-            }));
-        }
-
+        this.props.fetchPosts();
     }
 
     getData() {
@@ -83,7 +76,7 @@ export class Signup extends Component {
             // since we are passing this method to a component we need to bind it
             emitEvent: this.fetch
         }
-        const { location } = this.props;
+        const { location, posts } = this.props;
         return (
             <React.Fragment>
                 <div data-test="signupComponent" className="container-fluid">
@@ -118,6 +111,16 @@ export class Signup extends Component {
                             </div>
 
                             <div><ButtonList  {...configButton} /></div>
+                            {posts.length > 0 &&
+                                <div>{posts.map((post, index) => {
+                                    const { title, body } = post;
+                                    const configListItem = {
+                                        title,
+                                        desc: body
+                                    }
+                                    return (<ListUser key={index}{...configListItem} />)
+                                })}</div>}
+
                         </div>
 
                     </div>
@@ -137,6 +140,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLoginUser: (val) => dispatch({ type: actionTypes.LOGIN_USER, resultEld: { fullName: val.fullName, email: val.email, password: val.password, jobTitle: val.jobTitle } }),
+
+
 
     }
 
@@ -160,4 +165,7 @@ Signup.defaultProps = {
 };
 
 // fetchPosts is an action dispatch from another file
-export const SignupRedux = connect(mapStateToProps, { mapDispatchToProps: mapDispatchToProps, fetchPosts: fetchPosts })(Signup);
+/* redux thunk only work with class, in app component you want to make use of
+    async call use export default
+ */
+export default connect(mapStateToProps, { mapDispatchToProps: mapDispatchToProps, fetchPosts })(Signup);

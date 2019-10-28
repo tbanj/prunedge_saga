@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestAttr, checkProps } from '../../../util/index';
-import { ListUser } from './ListUser'
+import ListUser from './ListUser'
 
 const setUp = (props = {}) => {
     const component = shallow(<ListUser  {...props} />);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class ListUser extends Component {
+class ListUser extends Component {
     render() {
         const { title, desc } = this.props;
         if (!title) {
@@ -22,4 +22,4 @@ ListUser.propTypes = {
     desc: PropTypes.string,
 };
 
-// export default ListUser;
+export default ListUser;

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ToastContainer, toast } from "react-toastify";
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './store/reducers/reducer';
 import { Route, Redirect, Switch } from "react-router-dom";
 import { storeUser } from "./service/dataService.js";
 import { connect } from "react-redux";
@@ -11,18 +8,19 @@ import * as actionTypes from './store/action.js';
 import Storage from "./service/Storage.js";
 
 import { Signin, signinRedux } from './component/signin/Signin';
-import { Signup, SignupRedux } from './component/signup/Signup';
+import Signup from './component/signup/Signup';
 import Profile from './component/profile/Profile.jsx';
 import NotFound from './component/not-found/NotFound';
-
+import ProtectedRoute from './component/ProtectedRoute.jsx';
+import PostDisp from './component/async-list/PostDisp';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import ProtectedRoute from './component/ProtectedRoute.jsx';
+
 // import { ListUser } from './component/listUser/ListUser';
 const serverData = new Storage();
 
 const tempArr = [{ name: 'Alabi', age: 30, isOnline: true }];
-export class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -65,7 +63,7 @@ export class App extends Component {
         <ToastContainer />
         <Switch>
           <Route path="/not-found" component={NotFound} />
-          {/* <Route path="/list-post" component={ListUser} /> */}
+          <Route path="/list-post" component={PostDisp} />
           <Route path="/signin" render={(props) => <Signin {...props} tempArr={tempArr} />} />
           <ProtectedRoute path="/profile" render={(props) => <Profile {...props} />} />
           <Route exact path="/" render={(props) => <Signup {...props} handelAddUser={this.handelAddUser} />} />

@@ -20,7 +20,6 @@ const reducer = (state = initialState, action) => {
 
             return newState;
         case actionTypes.GET_POSTS:
-            console.log(action.payload);
             return {
                 ...state,
                 posts: state.posts.concat(action.payload)
