@@ -1,6 +1,7 @@
 import { LOGIN_USER, GET_POSTS } from '../action.js';
 import dataReducer from './reducer.js';
-/* reducers can be test for 2 scenerios,
+/*  Integration Test for Reducers
+reducers can be test for 2 scenerios,
     reducers are functions so we test fpor reducer functions
 it returns a default state if we dont receive any
 state it means we are working with empty array of

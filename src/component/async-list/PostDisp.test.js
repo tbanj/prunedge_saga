@@ -17,7 +17,7 @@ const setUp = (initialState = {}) => {
     const wrapper = shallow(<PostDisp store={store} />).childAt(0).dive();
     // console.log(wrapper.debug());
     return wrapper;
-}
+};
 
 
 
@@ -41,7 +41,7 @@ describe('App Component', () => {
         }
         wrapper = setUp(initialState);
 
-    })
+    });
     it('should render without errors', () => {
         // to see what shallow render is doing
         // console.log(component.debug());
@@ -53,7 +53,21 @@ describe('App Component', () => {
          .toBe(2) & we make use of it once below test will fail
          */
         expect(component.length).toBe(1);
-    })
+    });
+
+    // Integration test for updateButtonState Method
+    it('updateButtonState Method should update state as expected', () => {
+        const classInstance = wrapper.instance();
+        classInstance.updateButtonState();
+        const newState = classInstance.state.hideBtn;
+        expect(newState).toBe(true);
+    });
 
 
-})
+    // Integration test for returnNumber Method
+    it('returnNumber Method should update state as expected', () => {
+        const classInstance = wrapper.instance();
+        const newValue = classInstance.returnNumber(6);
+        expect(newValue).toBe(7);
+    });
+});

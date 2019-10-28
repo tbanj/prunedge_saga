@@ -5,18 +5,19 @@ import { findByTestAttr, checkProps } from '../../../util/index';
 
 const setUp = (props = {}) => {
     const component = shallow(<ButtonList {...props} />);
-    console.log(component.debug());
+    // console.log(component.debug());
     return component;
 }
 describe('ButtonList Component', () => {
 
     describe('Have Props', () => {
         let wrapper;
+
         let mockFunc;
         beforeEach(() => {
-            /* mockFunc is a function which is use to simulate  click
+            /* Integration Test to simulate event
+            mockFunc is a function which is use to simulate  click
             event in a button */
-
             mockFunc = jest.fn()
             const props = {
                 buttonText: 'Example Button',

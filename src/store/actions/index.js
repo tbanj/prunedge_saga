@@ -1,5 +1,4 @@
 import * as actionTypes from '../action';
-// import { types } from './types';
 import axios from 'axios';
 
 export const fetchPosts = () => async (dispatch) => {
