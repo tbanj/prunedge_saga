@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
 // import reducer from './store/reducers/reducer.js';
-import { store } from './createStore.js';
+import { store, activateSaga } from './createStore.js';
 
 import App from './App';
 import "./../node_modules/font-awesome/css/font-awesome.css";
@@ -18,7 +18,7 @@ import './index.css';
 // export const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 // // const store = createStore(reducer);
 // const store = createStoreWithMiddleware(reducer);
-
+activateSaga();
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}><App /></Provider>

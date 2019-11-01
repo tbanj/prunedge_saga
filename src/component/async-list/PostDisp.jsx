@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchPosts } from '../../store/actions/index';
-import * as actionTypes from '../../store/action';
+import { fetchPosts, logout } from '../../store/actions/index';
 import ListUser from '../listUser/ListUser';
 import ButtonList from '../button-list/ButtonList';
 
@@ -44,18 +43,19 @@ class PostDisp extends Component {
         const { hideBtn } = this.state;
         const { posts } = this.props;
         return (<div className="postDisp" data-test="postDispComponent">
-            <div>
-                {posts.length === 0 && <ButtonList  {...configButton} />}
+            <div className="row">
+                <div>{!hideBtn && <ButtonList  {...configButton} />}</div>
+                <button onClick={this.props.logout}>Logout</button>
             </div>
-            {!hideBtn &&
-                <div>{posts.map((post, index) => {
-                    const { title, body } = post;
-                    const configListItem = {
-                        title,
-                        desc: body,
-                    }
-                    return (<ListUser key={index}{...configListItem} />)
-                })}</div>}
+
+            {<div>{posts && posts.map((post, index) => {
+                const { title, body } = post;
+                const configListItem = {
+                    title,
+                    desc: body,
+                }
+                return (<ListUser key={index}{...configListItem} />)
+            })}</div>}
         </div>);
     }
 }
@@ -68,4 +68,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { fetchPosts })(PostDisp);
+export default connect(mapStateToProps, { fetchPosts, logout })(PostDisp);

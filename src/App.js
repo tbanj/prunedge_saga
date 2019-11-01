@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { storeUser } from "./service/dataService.js";
 import { connect } from "react-redux";
-import * as actionTypes from './store/action.js';
+import * as actionTypes from './store/actions/index';
 import Storage from "./service/Storage.js";
 
 import Signin from './component/signin/Signin';
@@ -13,12 +13,11 @@ import Profile from './component/profile/Profile.jsx';
 import NotFound from './component/not-found/NotFound';
 import ProtectedRoute from './component/ProtectedRoute.jsx';
 import PostDisp from './component/async-list/PostDisp';
+import Dashboard from './component/dashboard/Dashboard.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
-// import { ListUser } from './component/listUser/ListUser';
 const serverData = new Storage();
-
 const tempArr = [{ name: 'Alabi', age: 30, isOnline: true }];
 class App extends Component {
   constructor(props) {
@@ -64,6 +63,7 @@ class App extends Component {
           <Route path="/not-found" component={NotFound} />
           <Route path="/list-post" component={PostDisp} />
           <Route path="/signin" render={(props) => <Signin {...props} tempArr={tempArr} />} />
+          <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
           <ProtectedRoute path="/profile" render={(props) => <Profile {...props} />} />
           <Route exact path="/" render={(props) => <Signup {...props} handelAddUser={this.handelAddUser} />} />
           <Redirect to="/not-found" />
@@ -94,15 +94,5 @@ App.defaultProps = {
 };
 
 export default connect(null, mapDispatchToProps)(App);
-
-// const store = createStore(reducer);
-
-// const ConnectedApp = connect(null, mapDispatchToProps)(App);
-
-// const Root = () => {
-//   return <Provider store={store}><ConnectedApp /></Provider>
-// }
-
-// export default Root;
 
 

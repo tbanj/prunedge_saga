@@ -1,7 +1,8 @@
-import * as actionTypes from '../action';
+import * as actionTypes from '../actions/index';
 const initialState = {
     user: {},
-    posts: []
+    posts: [],
+    userLogin: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: state.posts.concat(action.payload)
+            }
+        case actionTypes.AUTH_LOGOUT:
+            return {
+                ...state,
+                userLogin: false
             }
         default:
             return state;

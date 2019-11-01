@@ -9712,6 +9712,11 @@ react-error-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.3.tgz#c378c4b0a21e88b2e159a3e62b2f531fd63bf60d"
   integrity sha512-bOUvMWFQVk5oz8Ded9Xb7WVdEi3QGLC8tH7HmYP0Fdp4Bn3qw0tRFmr5TW6mvahzvmrK4a6bqWGfCevBflP+Xw==
 
+react-idle-timer@^4.2.11:
+  version "4.2.11"
+  resolved "https://registry.yarnpkg.com/react-idle-timer/-/react-idle-timer-4.2.11.tgz#45dc6af7055a55ac8332ea03a419ff67c252e26f"
+  integrity sha512-Bijl9NKdhpiyQtLSLXcmHiXr+uEvBpz6dzWF2jFDtzu4BCYRM9jvXZwq7vZOakRsBTrkdO34mCw+1qZgrKr28A==
+
 react-is@^16.10.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
