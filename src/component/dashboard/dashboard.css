@@ -33,7 +33,7 @@
 }
 
 #logoDim{
-  filter: invert(48%) sepia(13%) saturate(100%) hue-rotate(130deg) brightness(95%) contrast(80%)
+  filter: invert(48%) sepia(13%) saturate(100%) hue-rotate(130deg) brightness(95%) contrast(80%);
 }
 
 .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
@@ -41,6 +41,16 @@
   border-left: 3px solid #0C66FF;
   font-weight: bold;
 }
+
+.ant-menu-dark .ant-menu-item-selected .anticon {
+  color: #43536F !important;
+  filter: invert(48%) sepia(13%) saturate(100%) hue-rotate(130deg) brightness(95%) contrast(80%) !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected .anticon + span {
+  color: #43536F !important;
+}
+
 
 #bottomLogout {
   position: absolute; 
@@ -75,16 +85,10 @@
 }
 
 
-/* super admin icon summary */
-.superAdminIcon {
-  height: 64px !important;
-  width: 64px !important;
-  border-radius: 50%;
-}
-.departmentBackground {
-  background-color: #B073FD;
+.sidebarLogout {
+  bottom: 0;
+  width: 100% !important;
+  position: absolute !important;
 }
 
-.memberBackground {
-  background-color: #8FD7FF;
-}
+

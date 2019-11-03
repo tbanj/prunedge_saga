@@ -6,8 +6,6 @@ import { fetchPosts } from '../../store/actions/index';
 import * as actions from '../../store/actions/index';
 import { getUsers, storeUser } from "../../service/dataService.js";
 import MultiForm from '../template/MultiForm';
-import ListUser from '../listUser/ListUser';
-import { ButtonList } from '../button-list/ButtonList';
 
 
 
@@ -71,12 +69,7 @@ class Signup extends Component {
     }
 
     render() {
-        const configButton = {
-            buttonText: 'Get Post',
-            // since we are passing this method to a component we need to bind it
-            emitEvent: this.fetch
-        }
-        const { location, posts } = this.props;
+        const { location } = this.props;
         return (
             <React.Fragment>
                 <div data-test="signupComponent" className="container-fluid">

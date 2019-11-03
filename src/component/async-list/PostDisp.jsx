@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchPosts, logout } from '../../store/actions/index';
@@ -67,5 +66,12 @@ const mapStateToProps = (state) => {
     }
 }
 
+PostDisp.propTypes = {
+    posts: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        body: PropTypes.string,
+    })),
+    fetchPosts: PropTypes.func,
+};
 
 export default connect(mapStateToProps, { fetchPosts, logout })(PostDisp);

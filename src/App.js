@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { storeUser } from "./service/dataService.js";
+// import { storeUser } from "./service/dataService.js";
 import { connect } from "react-redux";
 import * as actionTypes from './store/actions/index';
 import Storage from "./service/Storage.js";
@@ -55,7 +55,6 @@ class App extends Component {
 
 
   render() {
-    const { user } = this.state;
     return (
       <div data-test="appComponent">
         <ToastContainer />

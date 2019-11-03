@@ -1,12 +1,11 @@
 import React from 'react';
 // import antd from 'antd';
-
-import './dashboard.css';
-// const { Layout, Menu, Icon } = antd;
 import { Layout, Menu, Icon, Table } from 'antd';
+import UserIcon from '../template/userIcon/UserIcon';
+import './dashboard.css';
+import StorageProgress from '../template/storageProgress/StorageProgress';
+
 const { Header, Sider, Content } = Layout;
-
-
 
 const columns = [
     {
@@ -129,23 +128,20 @@ class Dashboard extends React.Component {
                     </div>
                     <Menu className="" theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                         <Menu.Item key="1" className="my-3">
-                            <span id="logoDim" ><img className="mb-2" src="/images/dashboard/home_icon.PNG" alt="homeIcon" /></span>
-                            <span className="p-3">Dashboard</span>
+                            <Icon component={() => (<img className="mb-2" src="/images/dashboard/sidebar/home_icon.svg" alt="homeIcon" />)} />
+                            <span className="">Dashboard</span>
                         </Menu.Item>
                         <Menu.Item key="2" className="my-3">
-                            <span id="logoDim" ><img className="mb-2" src="/images/dashboard/user.PNG" alt="userIcon" /></span>
-                            <span className="p-3">Audit Log</span>
+                            <Icon component={() => (<img className="mb-2" src="/images/dashboard/sidebar/User.svg" alt="userIcon" />)} />
+                            <span className="">Audit Log</span>
                         </Menu.Item>
                         <Menu.Item key="3" className="my-3">
-
-                            <span id="logoDim" ><img className="mb-2" src="/images/dashboard/gear.PNG" alt="settingIcon" /></span>
-                            <span className="p-3">Settings</span>
+                            <Icon component={() => (<img className="mb-2" src="/images/dashboard/sidebar/settings_icon.svg" alt="settingIcon" />)} />
+                            <span className="">Settings</span>
                         </Menu.Item>
-
-                        <Menu.Item key="4" className="mt-auto ">
-
-                            <span id="logoDim" ><img className="mb-2" src="/images/dashboard/Left_arrow_round.PNG" alt="settingIcon" /></span>
-                            <span className="p-3">Settings</span>
+                        <Menu.Item key="4" className=" sidebarLogout">
+                            <Icon component={() => (<img className="mb-2" src="/images/dashboard/sidebar/Left arrow round.svg" alt="leftArrowIcon" />)} />
+                            <span className="">Log Out</span>
                         </Menu.Item>
 
                     </Menu>
@@ -176,63 +172,16 @@ class Dashboard extends React.Component {
                                     </div>
                                 </Content>
                             </div>
-                            <div className="m-3 bg-white">
-                                {/* bottom graph and user summary div */}
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="superAdminIcon departmentBackground text-center ">
-                                                            <img className="my-3" width="35" src="/images/dashboard/departments/Group (2).svg" alt="department_edms" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="superAdminIcon memberBackground text-center ">
-                                                            <img className="my-3" width="30" src="/images/dashboard/members/Vector.svg" alt="department_edms" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div className="m-3 ">
+                                <UserIcon />
 
-                                        </div>
-                                        <div className="col-md-6">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="row">
-                                                <div className="col-md-6">
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="superAdminIcon departmentBackground text-center ">
-                                                            <img className="my-3" width="35" src="/images/dashboard/departments/Group (2).svg" alt="department_edms" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-6">
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="superAdminIcon memberBackground text-center ">
-                                                            <img className="my-3" width="30" src="/images/dashboard/members/Vector.svg" alt="department_edms" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-md-6">
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div className="col-md-4"></div>
+                        <div className="col-md-4 p-4 pr-3" >
+                            <div className="bg-white p-5 mr-3" style={{ height: '100%' }}>
+                                <StorageProgress />
+                            </div>
+                        </div>
                     </div>
 
                 </Layout>

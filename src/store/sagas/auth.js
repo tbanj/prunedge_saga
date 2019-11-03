@@ -1,8 +1,6 @@
 import { put } from 'redux-saga/effects';
 import { delay } from 'redux-saga/effects';
 import * as actions from '../actions/index';
-
-import { dispatch } from '../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/pairs';
 /* * after a func turns it to a generator which are 
 func that can be implemented incrementally they
 can be pause also */
